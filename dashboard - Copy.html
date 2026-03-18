@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halleyx Dashboard</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>Halleyx</h2>
+        <p class="sidebar-subtitle">Analytics Suite</p>
+      </div>
+
+      <div class="sidebar-nav">
+        <button class="active" onclick="window.location.href='dashboard.html'">Dashboard</button>
+        <button onclick="window.location.href='orders.html'">Customer Orders</button>
+        <button onclick="window.location.href='config.html'">Configure</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-mini-card">
+          <p class="mini-label">Status</p>
+          <h4>Workspace Active</h4>
+          <span>Custom dashboard builder enabled</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <!-- Attractive Hero Header -->
+      <section class="dashboard-hero-wrapper">
+        <div class="dashboard-hero-main">
+  <div class="hero-text">
+    <span class="eyebrow">CUSTOM ANALYTICS PLATFORM</span>
+    <h1 class="dashboard-title gradient-text">Customer Analytics Dashboard</h1>
+    <p class="dashboard-subtitle">
+      Monitor customer orders, revenue insights, widget-based analytics,
+      and dashboard activity from one elegant workspace.
+    </p>
+
+    <div class="hero-chip-row">
+      <span class="hero-chip">Live Metrics</span>
+      <span class="hero-chip">Real-time Widgets</span>
+      <span class="hero-chip">Responsive Layout</span>
+    </div>
+  </div>
+
+  <div class="middle-insights">
+  <div class="insight-card">
+    <span class="insight-label">Active Widgets</span>
+    <h3>07</h3>
+  </div>
+
+  <div class="insight-card">
+    <span class="insight-label">Total Records</span>
+    <h3>1245</h3>
+  </div>
+
+  <div class="insight-card">
+    <span class="insight-label">Last Updated</span>
+    <h3>Today</h3>
+  </div>
+</div>
+
+  <div class="dashboard-top-icons">
+    <button id="themeToggle" class="top-icon-btn" title="Toggle Theme">🌙</button>
+
+    <div class="icon-wrapper">
+      <button id="notificationBtn" class="top-icon-btn" title="Notifications">🔔</button>
+      <div id="notificationMenu" class="icon-dropdown hidden">
+        <h4>Notifications</h4>
+        <p>New widget settings saved</p>
+        <p>Dashboard synced successfully</p>
+        <p>Orders data updated</p>
+      </div>
+    </div>
+
+    <div class="profile-wrapper">
+      <button id="profileBtn" class="top-profile-btn" type="button">G</button>
+
+      <div id="profileMenu" class="profile-menu hidden">
+        <div class="profile-header">
+          <div class="profile-avatar">G</div>
+          <div>
+            <h4>Gokul Raj</h4>
+            <span>Admin</span>
+          </div>
+        </div>
+
+        <div class="profile-divider"></div>
+
+        <button class="profile-item" onclick="window.location.href='orders.html'">👤 Profile</button>
+        <button class="profile-item" onclick="window.location.href='orders.html'">📦 Customer Orders</button>
+        <button class="profile-item" onclick="window.location.href='config.html'">⚙ Configure Dashboard</button>
+
+        <div class="profile-divider"></div>
+
+        <button class="profile-item logout" onclick="alert('Logged out')">🚪 Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div class="dashboard-toolbar premium-toolbar">
+          <div class="toolbar-left">
+            <div class="toolbar-field">
+              <label class="toolbar-label" for="dateFilter">Show data for</label>
+              <select id="dateFilter" class="filter-select">
+                <option value="all">All time</option>
+                <option value="today">Today</option>
+                <option value="7">Last 7 Days</option>
+                <option value="30">Last 30 Days</option>
+                <option value="90">Last 90 Days</option>
+              </select>
+            </div>
+
+            <div class="toolbar-field toolbar-search">
+              <label class="toolbar-label" for="orderSearch">Quick Search</label>
+              <input
+                type="text"
+                id="orderSearch"
+                class="search-box"
+                placeholder="Search orders..."
+              />
+            </div>
+          </div>
+
+          <div class="toolbar-right">
+  <button class="secondary-btn" onclick="loadDemoData()">Load Demo Data</button>
+  <button class="secondary-btn" onclick="resetDashboardLayout()">Restore Default</button>
+  <button class="primary-btn" onclick="window.location.href='config.html'">Configure Dashboard</button>
+      <div id="notificationMenu" class="icon-dropdown hidden">
+        <h4>Notifications</h4>
+        <p>New widget settings saved</p>
+        <p>Dashboard synced successfully</p>
+        <p>Orders data updated</p>
+      </div>
+    </div>
+
+      <div id="profileMenu" class="profile-menu hidden">
+        <div class="profile-header">
+          <div class="profile-avatar">G</div>
+          <div>
+            <h4>Gokul Raj</h4>
+            <span>Admin</span>
+          </div>
+        </div>
+
+        <div class="profile-divider"></div>
+
+        <button class="profile-item" onclick="window.location.href='orders.html'">👤 Customer Orders</button>
+        <button class="profile-item" onclick="window.location.href='config.html'">⚙ Configure Dashboard</button>
+
+        <div class="profile-divider"></div>
+
+        <button class="profile-item logout" onclick="alert('Logged out')">🚪 Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+      </section>
+
+      <!-- Loading -->
+      <div id="loadingState" class="loading-state hidden">
+        <div class="loader"></div>
+        <p>Loading dashboard data...</p>
+      </div>
+
+      <!-- Empty Message -->
+      <div id="emptyMsg">
+        No widgets configured yet. Click Configure Dashboard to build your custom view.
+      </div>
+
+      <!-- KPI -->
+      <section id="kpiSection" class="kpi-row hidden">
+        <div id="ordersCard" class="kpi-card glow-card">
+          <div class="kpi-top">
+            <p>Total Orders</p>
+            <span class="kpi-badge">Live</span>
+          </div>
+          <h2 id="totalOrders">0</h2>
+          <span class="up">+ Updated from orders</span>
+        </div>
+
+        <div id="revenueCard" class="kpi-card glow-card">
+          <div class="kpi-top">
+            <p>Revenue</p>
+            <span class="kpi-badge">USD</span>
+          </div>
+          <h2 id="totalRevenue">$0</h2>
+          <span class="up">+ Revenue analytics</span>
+        </div>
+
+        <div id="customersCard" class="kpi-card glow-card">
+          <div class="kpi-top">
+            <p>Customers</p>
+            <span class="kpi-badge">Active</span>
+          </div>
+          <h2 id="totalCustomers">0</h2>
+          <span class="up">+ Unique customer count</span>
+        </div>
+      </section>
+
+      <!-- Charts -->
+      <section id="chartSection" class="charts-row hidden">
+        <div class="chart-card large-chart glow-card">
+          <div class="chart-header">
+            <div>
+              <h3 id="trendChartTitle">Orders Trend</h3>
+              <p class="chart-subtext">Daily or period-based order movement</p>
+            </div>
+            <button class="mini-btn" onclick="downloadChart('ordersChart')">Download</button>
+          </div>
+          <canvas id="ordersChart"></canvas>
+        </div>
+
+        <div class="chart-card donut-card glow-card">
+          <div class="chart-header">
+            <div>
+              <h3 id="statusChartTitle">Orders by Status</h3>
+              <p class="chart-subtext">Pending, in progress, completed</p>
+            </div>
+          </div>
+          <canvas id="statusChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Configured Widgets -->
+      <section class="table-card glow-card">
+        <div class="table-header">
+          <div>
+            <h3>Configured Widgets</h3>
+            <p class="section-subtext">Saved dashboard layout preview</p>
+          </div>
+        </div>
+
+        <div id="configuredWidgets" class="configured-widgets-grid">
+          <div class="widget-empty">No saved widget configuration yet.</div>
+        </div>
+      </section>
+
+      <!-- Recent Orders -->
+      <section id="tableSection" class="table-card glow-card hidden">
+        <div class="table-header">
+          <div>
+            <h3 id="recentOrdersTitle">Recent Orders</h3>
+            <p class="section-subtext">Latest customer order activity</p>
+          </div>
+          <button class="view-all-btn" onclick="window.location.href='orders.html'">View All</button>
+        </div>
+
+        <table class="orders-table">
+          <thead>
+            <tr></tr>
+          </thead>
+          <tbody id="recentOrdersBody"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/script.js"></script>
+  <script>
+  const profileBtnEl = document.getElementById("profileBtn");
+  const profileMenuEl = document.getElementById("profileMenu");
+
+  if (profileBtnEl && profileMenuEl) {
+    profileBtnEl.addEventListener("click", function (e) {
+      e.stopPropagation();
+      profileMenuEl.classList.toggle("hidden");
+    });
+
+    profileMenuEl.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
+    document.addEventListener("click", function () {
+      profileMenuEl.classList.add("hidden");
+    });
+  }
+</script>
+  <script>
+  const dashboardThemeBtn = document.getElementById("themeToggle");
+
+  function applyDashboardTheme() {
+    const savedTheme = localStorage.getItem("dashboardTheme") || "light";
+
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      if (dashboardThemeBtn) dashboardThemeBtn.innerText = "☀️";
+    } else {
+      document.body.classList.remove("dark-mode");
+      if (dashboardThemeBtn) dashboardThemeBtn.innerText = "🌙";
+    }
+  }
+
+  if (dashboardThemeBtn) {
+    dashboardThemeBtn.addEventListener("click", function () {
+      document.body.classList.toggle("dark-mode");
+
+      const isDark = document.body.classList.contains("dark-mode");
+      localStorage.setItem("dashboardTheme", isDark ? "dark" : "light");
+
+      dashboardThemeBtn.innerText = isDark ? "☀️" : "🌙";
+    });
+  }
+
+  applyDashboardTheme();
+</script>
+</body>
+</html>

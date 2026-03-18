@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Orders</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Halleyx</h2>
+
+      <button onclick="window.location.href='dashboard.html'">Dashboard</button>
+      <button class="active" onclick="window.location.href='orders.html'">Customer Orders</button>
+      <button class="primary" onclick="window.location.href='config.html'">Configure</button>
+    </div>
+
+    <div class="main">
+      <div class="orders-page">
+        <div class="orders-topbar">
+          <div>
+            <h2>Customer Orders</h2>
+            <p class="subtext">Create, manage, and update customer order records.</p>
+          </div>
+
+          <div class="orders-actions">
+            <input type="file" id="csvFileInput" accept=".csv" style="display:none" onchange="importOrdersCSV(event)">
+            <button class="secondary-btn" onclick="document.getElementById('csvFileInput').click()">Import CSV</button>
+            <button class="secondary-btn" onclick="exportOrdersCSV()">Export CSV</button>
+            <button id="themeToggle" class="secondary-btn">🌙 Theme</button>
+            <button class="primary-btn" onclick="openOrderModal()">Create Order</button>
+            <button class="secondary-btn" onclick="goDashboard()">Back to Dashboard</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Orders List</h3>
+          </div>
+
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Customer ID</th>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Created By</th>
+                <th>Order Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Create Order</h3>
+        <button class="close-btn" onclick="closeOrderModal()">✕</button>
+      </div>
+
+      <div class="form-grid">
+        <input id="firstName" type="text" placeholder="First Name" />
+        <input id="lastName" type="text" placeholder="Last Name" />
+        <input id="email" type="text" placeholder="Email ID" />
+        <input id="phone" type="text" placeholder="Phone Number" />
+        <input id="street" type="text" placeholder="Street Address" />
+        <input id="city" type="text" placeholder="City" />
+        <input id="state" type="text" placeholder="State / Province" />
+        <input id="postal" type="text" placeholder="Postal Code" />
+
+        <select id="country">
+<option value="">Select Country</option>
+
+<option>Afghanistan</option>
+<option>Albania</option>
+<option>Algeria</option>
+<option>Argentina</option>
+<option>Australia</option>
+<option>Austria</option>
+<option>Bangladesh</option>
+<option>Belgium</option>
+<option>Brazil</option>
+<option>Canada</option>
+<option>China</option>
+<option>Colombia</option>
+<option>Czech Republic</option>
+<option>Denmark</option>
+<option>Egypt</option>
+<option>Finland</option>
+<option>France</option>
+<option>Germany</option>
+<option>Greece</option>
+<option>Hong Kong</option>
+<option>Hungary</option>
+<option>India</option>
+<option>Indonesia</option>
+<option>Iran</option>
+<option>Iraq</option>
+<option>Ireland</option>
+<option>Israel</option>
+<option>Italy</option>
+<option>Japan</option>
+<option>Kenya</option>
+<option>Malaysia</option>
+<option>Mexico</option>
+<option>Netherlands</option>
+<option>New Zealand</option>
+<option>Nigeria</option>
+<option>Norway</option>
+<option>Pakistan</option>
+<option>Philippines</option>
+<option>Poland</option>
+<option>Portugal</option>
+<option>Qatar</option>
+<option>Romania</option>
+<option>Russia</option>
+<option>Saudi Arabia</option>
+<option>Singapore</option>
+<option>South Africa</option>
+<option>South Korea</option>
+<option>Spain</option>
+<option>Sri Lanka</option>
+<option>Sweden</option>
+<option>Switzerland</option>
+<option>Taiwan</option>
+<option>Thailand</option>
+<option>Turkey</option>
+<option>Ukraine</option>
+<option>United Arab Emirates</option>
+<option>United Kingdom</option>
+<option>United States</option>
+<option>Vietnam</option>
+
+</select>
+
+        <select id="product">
+          <option value="">Choose Product</option>
+          <option>Fiber Internet 300 Mbps</option>
+          <option>5GUnlimited Mobile Plan</option>
+          <option>Fiber Internet 1 Gbps</option>
+          <option>Business Internet 500 Mbps</option>
+          <option>VoIP Corporate Package</option>
+        </select>
+
+        <input id="quantity" type="number" min="1" value="1" placeholder="Quantity" />
+        <input id="unitPrice" type="number" min="0" placeholder="Unit Price" />
+        <input id="totalAmount" type="text" placeholder="Total Amount" readonly />
+
+        <select id="status">
+          <option>Pending</option>
+          <option>In progress</option>
+          <option>Completed</option>
+        </select>
+
+        <select id="createdBy">
+          <option value="">Created By</option>
+          <option>Mr. Michael Harris</option>
+          <option>Mr. Ryan Cooper</option>
+          <option>Ms. Olivia Carter</option>
+          <option>Mr. Lucas Martin</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button class="secondary-btn" onclick="closeOrderModal()">Cancel</button>
+        <button class="primary-btn" onclick="saveOrder()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/orders.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Halleyx Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<h1>Halleyx Dashboard</h1>
+
+<button onclick="openDashboard()">Open Dashboard</button>
+
+<head>
+
+<title>Dashboard</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<h1>Dashboard</h1>
+
+<button onclick="openConfig()">Configure Dashboard</button>
+
+<div id="dashboard">
+
+<p>No widgets added</p>
+
+</div>
+
+<h1>Configure Dashboard</h1>
+
+<h3>Widgets</h3>
+
+<button onclick="addWidget('kpi')">KPI</button>
+
+<button onclick="addWidget('chart')">Chart</button>
+
+<button onclick="addWidget('table')">Table</button>
+
+<div class="kpi-card">
+
+<h4>Total Orders</h4>
+
+<h2>1245</h2>
+
+<p class="growth">+12% this week</p>
+
+<div class="kpi-container">
+
+<div class="kpi-card">...</div>
+<div class="kpi-card">...</div>
+<div class="kpi-card">...</div>
+
+</div>
+
+<div id="canvas"></div>
+
+<head>
+<meta charset="UTF-8">
+<title>Halleyx Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Halleyx</h2>
+
+<button onclick="addKPI()">Add KPI</button>
+<button onclick="addChart()">Add Chart</button>
+<button onclick="addTable()">Add Table</button>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+
+<h1>Dashboard</h1>
+
+<select>
+<option>All Time</option>
+<option>Today</option>
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>Last 90 Days</option>
+</select>
+
+</div>
+
+<div class="kpi-row">
+
+<div class="kpi-card">
+<p>Total Orders</p>
+<h2>1245</h2>
+<span class="up">+12%</span>
+</div>
+
+<div class="kpi-card">
+<p>Revenue</p>
+<h2>$8450</h2>
+<span class="up">+8%</span>
+</div>
+
+<div class="kpi-card">
+<p>Customers</p>
+<h2>245</h2>
+<span class="up">+5%</span>
+</div>
+
+<div id="dashboard" class="dashboard-grid"></div>
+
+<head>
+
+<meta charset="UTF-8">
+<title>Halleyx Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Halleyx</h2>
+
+<button onclick="addKPI()">Add KPI</button>
+<button onclick="addChart()">Add Chart</button>
+<button onclick="addTable()">Add Table</button>
+
+</div>
+
+<div class="main">
+
+<h1>Dashboard</h1>
+
+<div id="dashboard"></div>
+
+<div class="sidebar">
+
+<h2>Dashboard</h2>
+
+<ul>
+<li>Orders</li>
+<li>Customers</li>
+<li>Reports</li>
+<li>Settings</li>
+</ul>
+
+</div>
+
+<div class="main">
+
+<div class="topbar">
+<h3>Customer Orders Dashboard</h3>
+<button onclick="location.href='config.html'">Configure Dashboard</button>
+</div>
+
+<div class="grid-stack"></div>
+
+</div>
+
+<span onclick="openSettings()">⚙</span>
+
+<button onclick="saveLayout()">Save Configuration</button>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

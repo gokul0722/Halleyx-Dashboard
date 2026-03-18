@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configure Dashboard</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- GridStack -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridstack@10.2.0/dist/gridstack.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gridstack@10.2.0/dist/gridstack-all.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>Halleyx</h2>
+        <p class="sidebar-subtitle">Analytics Suite</p>
+      </div>
+
+      <div class="sidebar-nav">
+        <button onclick="window.location.href='dashboard.html'">Dashboard</button>
+        <button onclick="window.location.href='orders.html'">Customer Orders</button>
+        <button class="active" onclick="window.location.href='config.html'">Configure</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-mini-card">
+          <p class="mini-label">Builder</p>
+          <h4>Dashboard Config</h4>
+          <span>Create and manage widget layouts for your dashboard.</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main" id="mainContent">
+      <!-- Top header -->
+      <section class="dashboard-hero-wrapper">
+        <div class="dashboard-hero-main">
+          <div class="hero-text">
+            <span class="eyebrow">LAYOUT BUILDER</span>
+            <h1 class="dashboard-title gradient-text">Configure Dashboard</h1>
+            <p class="dashboard-subtitle">
+              Customize your dashboard layout with KPI, chart, and table widgets.
+            </p>
+
+            <div class="hero-chip-row">
+              <span class="hero-chip">Drag Widgets</span>
+              <span class="hero-chip">Resize Layout</span>
+              <span class="hero-chip">Save Configuration</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Top action buttons -->
+      <section class="table-card glow-card" style="margin-top:0;">
+        <div class="table-header">
+          <div>
+            <h3>Dashboard Controls</h3>
+            <p class="section-subtext">Manage theme, reset layout, and save dashboard settings.</p>
+          </div>
+
+          <div class="orders-actions">
+            <button id="themeToggle" class="secondary-btn">🌙 Theme</button>
+            <button class="secondary-btn" onclick="resetLayout()">Reset</button>
+            <button class="secondary-btn" onclick="window.location.href='dashboard.html'">Back</button>
+            <button class="primary-btn" onclick="saveConfiguration()">Save Configuration</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Available Widgets -->
+      <section class="table-card glow-card" style="margin-top:22px;">
+        <div class="table-header">
+          <div>
+            <h3>Available Widgets</h3>
+            <p class="section-subtext">Click any widget type to add it to the dashboard canvas.</p>
+          </div>
+        </div>
+
+        <div class="widget-grid">
+          <div class="widget-column">
+            <button class="primary-btn" onclick="addChartType('bar')">Bar Chart</button>
+            <button class="primary-btn" onclick="addChartType('line')">Line Chart</button>
+            <button class="primary-btn" onclick="addChartType('pie')">Pie Chart</button>
+          </div>
+
+          <div class="widget-column">
+            <button class="primary-btn" onclick="addChartType('area')">Area Chart</button>
+            <button class="primary-btn" onclick="addChartType('scatter')">Scatter Plot</button>
+            <button class="primary-btn" onclick="addTableWidget()">Table</button>
+          </div>
+
+          <div class="widget-column">
+            <button class="primary-btn" onclick="addKPIWidget()">KPI Value</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Canvas -->
+      <section class="table-card glow-card">
+        <div class="table-header">
+          <div>
+            <h3>Dashboard Canvas</h3>
+            <p class="section-subtext">Widgets added here can be dragged, resized, and configured.</p>
+          </div>
+        </div>
+
+        <div class="grid-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Settings Panel -->
+  <aside id="settingsPanel" class="settings-panel hidden">
+    <div class="settings-panel-header">
+      <h3>Widget Settings</h3>
+      <button class="settings-close-btn" onclick="closeSettingsPanel()">✕</button>
+    </div>
+
+    <label for="chartXAxis">X Axis</label>
+    <select id="chartXAxis">
+      <option value="customer">Customer</option>
+      <option value="product">Product</option>
+      <option value="status">Status</option>
+      <option value="createdBy">Created By</option>
+      <option value="orderDate">Order Date</option>
+    </select>
+
+    <label for="chartYAxis">Y Axis</label>
+    <select id="chartYAxis">
+      <option value="quantity">Quantity</option>
+      <option value="unitPrice">Unit Price</option>
+      <option value="totalAmount">Total Amount</option>
+    </select>
+
+    <label for="chartColor">Chart Color</label>
+    <input type="color" id="chartColor" value="#3b82f6" />
+
+    <label class="checkbox-group" style="padding:10px 12px;">
+      <span>Show Data Labels</span>
+      <input type="checkbox" id="showDataLabels" />
+    </label>
+
+    <label for="widgetTitle">Widget Title</label>
+    <input type="text" id="widgetTitle" placeholder="Untitled" />
+
+    <label for="widgetWidth">Widget Width</label>
+    <input type="number" id="widgetWidth" min="2" max="12" value="4" />
+
+    <label for="widgetHeight">Widget Height</label>
+    <input type="number" id="widgetHeight" min="2" max="8" value="4" />
+
+    <label for="kpiMetric">KPI Metric</label>
+    <select id="kpiMetric">
+      <option value="totalOrders">Total Orders</option>
+      <option value="revenue">Revenue</option>
+      <option value="customers">Customers</option>
+    </select>
+
+    <div class="settings-actions">
+      <button class="secondary-btn" onclick="closeSettingsPanel()">Cancel</button>
+      <button class="primary-btn" onclick="saveWidgetSettings()">Save</button>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/config.js"></script>
+
+  <!-- Theme for config page -->
+  <script>
+    const configThemeBtn = document.getElementById("themeToggle");
+
+    function applyConfigTheme() {
+      const savedTheme = localStorage.getItem("dashboardTheme") || "light";
+
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        if (configThemeBtn) configThemeBtn.innerText = "☀️ Theme";
+      } else {
+        document.body.classList.remove("dark-mode");
+        if (configThemeBtn) configThemeBtn.innerText = "🌙 Theme";
+      }
+    }
+
+    if (configThemeBtn) {
+      configThemeBtn.addEventListener("click", function () {
+        document.body.classList.toggle("dark-mode");
+
+        const isDark = document.body.classList.contains("dark-mode");
+        localStorage.setItem("dashboardTheme", isDark ? "dark" : "light");
+
+        configThemeBtn.innerText = isDark ? "☀️ Theme" : "🌙 Theme";
+      });
+    }
+
+    applyConfigTheme();
+  </script>
+
+<script src="js/config.js"></script>
+
+</body>
+</html>
